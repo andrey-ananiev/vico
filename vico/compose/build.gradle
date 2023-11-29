@@ -80,7 +80,7 @@ dependencies {
     implementation libs.composeUI
     implementation libs.composeUITooling
     implementation libs.kotlinStdLib
-    testImplementation libs.JUnit
-    testImplementation libs.JUnitExt
+    //testImplementation libs.JUnit
+    //testImplementation libs.JUnitExt
     testImplementation libs.kotlinTest
 }
