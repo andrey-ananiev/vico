@@ -26,7 +26,7 @@ buildscript {
 
 plugins {
     alias(libs.plugins.detekt)
-    //alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.dokka) apply false
 }
 
 apply("versions.gradle")
