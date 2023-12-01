@@ -27,6 +27,7 @@ android {
         compileSdk library.target_sdk
         versionCode library.version_code
         versionName library.version_name
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -79,4 +80,5 @@ dependencies {
     //testImplementation libs.JUnit
     //testImplementation libs.JUnitExt
     testImplementation libs.kotlinTest
+    implementation libs.multidex
 }
