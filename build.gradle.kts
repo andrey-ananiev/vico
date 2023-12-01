@@ -35,6 +35,9 @@ apply("versions.gradle")
 //dependencies { detektPlugins(libs.detektFormatting) }
 
 tasks.register<Delete>("clean") { delete(rootProject.layout.buildDirectory) }
+subprojects {
+    tasks.withType<Javadoc>().all { enabled = false }
+}
 
 //tasks.register<Detekt>("detektFix") { autoCorrect = true }
 
