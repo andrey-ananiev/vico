@@ -67,12 +67,12 @@ public sealed class AxisPosition {
         /**
          * The horizontal axis will be placed at the top of its [Chart].
          */
-        public object Top : Horizontal()
+        public data object Top : Horizontal()
 
         /**
          * The horizontal axis will be placed at the bottom of its [Chart].
          */
-        public object Bottom : Horizontal()
+        public data object Bottom : Horizontal()
     }
 
     /**
@@ -83,11 +83,11 @@ public sealed class AxisPosition {
         /**
          * The vertical axis will be placed at the start of its [Chart].
          */
-        public object Start : Vertical()
+        public data object Start : Vertical()
 
         /**
          * The vertical axis will be placed at the end of its [Chart].
          */
-        public object End : Vertical()
+        public data object End : Vertical()
     }
 }
