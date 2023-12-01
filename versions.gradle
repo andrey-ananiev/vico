@@ -22,6 +22,6 @@ ext {
             version_code   : 1,
             target_sdk     : 34,
             min_sdk        : 16,
-            compose_min_sdk: 21,
+            compose_min_sdk: 26,
     ]
 }
