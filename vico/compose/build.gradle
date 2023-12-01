@@ -26,6 +26,7 @@ android {
 
     defaultConfig {
         minSdk library.compose_min_sdk
+        multiDexEnabled true
     }
 
     buildFeatures {
@@ -83,4 +84,5 @@ dependencies {
     //testImplementation libs.JUnit
     //testImplementation libs.JUnitExt
     testImplementation libs.kotlinTest
+    implementation 'com.android.support:multidex:1.0.3'
 }
