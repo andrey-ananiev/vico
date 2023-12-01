@@ -14,35 +14,36 @@
  * limitations under the License.
  */
 
-import io.gitlab.arturbosch.detekt.Detekt
+//import io.gitlab.arturbosch.detekt.Detekt
 
 buildscript {
     dependencies {
         classpath(libs.buildTools)
         classpath(libs.kotlinGradlePlugin)
-        classpath(libs.paparazziGradlePlugin)
+       // classpath(libs.paparazziGradlePlugin)
     }
 }
 
 plugins {
-    alias(libs.plugins.detekt)
+   // alias(libs.plugins.detekt)
    // alias(libs.plugins.dokka) apply false
+    alias(libs.plugins.googleServices) apply false
 }
 
 apply("versions.gradle")
 
-dependencies { detektPlugins(libs.detektFormatting) }
+//dependencies { detektPlugins(libs.detektFormatting) }
 
 tasks.register<Delete>("clean") { delete(rootProject.layout.buildDirectory) }
 
-tasks.register<Detekt>("detektFix") { autoCorrect = true }
+//tasks.register<Detekt>("detektFix") { autoCorrect = true }
 
-tasks.withType<Detekt>().configureEach {
-    source = fileTree(projectDir)
-    config = files(".idea/detekt-config.yml")
-    buildUponDefaultConfig = true
-    reports.html {
-        required = true
-        outputLocation = file("build/reports/detekt/detekt.html")
-    }
-}
+//tasks.withType<Detekt>().configureEach {
+//    source = fileTree(projectDir)
+//    config = files(".idea/detekt-config.yml")
+//    buildUponDefaultConfig = true
+//    reports.html {
+//        required = true
+//        outputLocation = file("build/reports/detekt/detekt.html")
+//    }
+//}
