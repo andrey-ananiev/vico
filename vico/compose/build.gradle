@@ -14,10 +14,13 @@
  * limitations under the License.
  */
 
+//import org.jetbrains.dokka.gradle.DokkaTaskPartial
+
 plugins {
 
     id "com.android.library"
     id "kotlin-android"
+    id "org.jetbrains.dokka"
 }
 
 apply from: "$rootDir/common-scripts.gradle"
@@ -87,7 +90,16 @@ dependencies {
     implementation libs.multidex
 }
 
-tasks.withType(Javadoc).configureEach {
-    enabled = false
-    it.enabled = false
-}
+//subprojects {
+//    version = library.version_name
+//    apply plugin: "org.jetbrains.dokka"
+//    tasks.withType(DokkaTaskPartial.class).configureEach {
+//        suppressInheritedMembers.set true
+//        dokkaSourceSets.configureEach { includes.from "Module.md" }
+//    }
+//}
+
+//dokkaHtmlMultiModule {
+//    String dokkaBaseConfiguration = "{ \"customStyleSheets\": [\"$rootDir/logo-styles.css\"] }"
+//    pluginsMapConfiguration.set(["org.jetbrains.dokka.base.DokkaBase": dokkaBaseConfiguration])
+//}
