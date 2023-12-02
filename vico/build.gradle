@@ -29,10 +29,6 @@ subprojects {
         suppressInheritedMembers.set true
         dokkaSourceSets.configureEach { includes.from "Module.md" }
     }
-    tasks.withType(Javadoc).configureEach {
-        enabled = false
-        it.enabled = false
-    }
 }
 
 dokkaHtmlMultiModule {

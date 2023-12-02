@@ -17,7 +17,7 @@
 plugins {
     id "com.android.application"
     id "kotlin-android"
-    //id "app.cash.paparazzi"
+    id "app.cash.paparazzi"
 }
 
 android {
@@ -27,7 +27,6 @@ android {
         compileSdk library.target_sdk
         versionCode library.version_code
         versionName library.version_name
-        multiDexEnabled true
     }
 
     buildTypes {
@@ -43,12 +42,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_19
-        targetCompatibility JavaVersion.VERSION_19
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_19.toString()
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
 
     composeOptions {
@@ -77,8 +76,7 @@ dependencies {
     implementation libs.material
     implementation libs.systemUIController
     implementation libs.viewModelCompose
-    //testImplementation libs.JUnit
-    //testImplementation libs.JUnitExt
+    testImplementation libs.JUnit
+    testImplementation libs.JUnitExt
     testImplementation libs.kotlinTest
-    implementation libs.multidex
 }
