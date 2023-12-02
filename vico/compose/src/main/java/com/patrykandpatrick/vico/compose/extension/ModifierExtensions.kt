@@ -32,9 +32,8 @@ internal fun Modifier.chartTouchEvent(
     isScrollEnabled: Boolean,
     scrollableState: ChartScrollState,
     onZoom: OnZoom?,
-): Modifier {
-    var isDragStart = false
-    return scrollable(
+): Modifier =
+    scrollable(
         state = scrollableState,
         orientation = Orientation.Horizontal,
         reverseDirection = true,
@@ -47,10 +46,8 @@ internal fun Modifier.chartTouchEvent(
                         while (true) {
                             val event = awaitPointerEvent()
                             when (event.type) {
-                                PointerEventType.Press -> setTouchPoint(null)
-                                PointerEventType.Release -> setTouchPoint(
-                                    if (!isDragStart) event.changes.first().position.point else null
-                                )
+                                PointerEventType.Press -> setTouchPoint(event.changes.first().position.point)
+                                PointerEventType.Release -> setTouchPoint(null)
                             }
                         }
                     }
@@ -63,9 +60,9 @@ internal fun Modifier.chartTouchEvent(
             if (!isScrollEnabled && setTouchPoint != null) {
                 pointerInput(setTouchPoint) {
                     detectHorizontalDragGestures(
-                        onDragStart = { isDragStart = true; setTouchPoint(it.point) },
-                        onDragEnd = { isDragStart = false; setTouchPoint(null) },
-                        onDragCancel = { isDragStart = false; setTouchPoint(null) },
+                        onDragStart = { setTouchPoint(it.point) },
+                        onDragEnd = { setTouchPoint(null) },
+                        onDragCancel = { setTouchPoint(null) },
                     ) { change, _ -> setTouchPoint(change.position.point) }
                 }
             } else {
@@ -84,7 +81,6 @@ internal fun Modifier.chartTouchEvent(
                 Modifier
             },
         )
-}
 
 private val Offset.point: Point
     get() = Point(x, y)
