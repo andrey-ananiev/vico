@@ -43,32 +43,32 @@ android {
 
         singleVariant("release") {
             withSourcesJar()
-            withJavadocJar()
+            //withJavadocJar()
         }
     }
 }
 
-//afterEvaluate {
-//
-//    publishing {
-//
-//        publications {
-//
-//            VicoCompose(MavenPublication) {
-//
-//                groupId = library.groupId
-//                artifactId = getArtifactId(project)
-//                version = project.version
-//                from components.release
-//
-//                customizePom(pom)
-//                setUpRepositories(repositories)
-//            }
-//        }
-//    }
-//
-//    setUpSigning(signing, publishing.publications.VicoCompose)
-//}
+afterEvaluate {
+
+    publishing {
+
+        publications {
+
+            VicoCompose(MavenPublication) {
+
+                groupId = library.groupId
+                artifactId = getArtifactId(project)
+                version = project.version
+                from components.release
+
+                customizePom(pom)
+                setUpRepositories(repositories)
+            }
+        }
+    }
+
+    setUpSigning(signing, publishing.publications.VicoCompose)
+}
 
 dependencies {
 

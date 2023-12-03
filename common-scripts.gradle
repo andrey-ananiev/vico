@@ -20,7 +20,6 @@ android {
 
     defaultConfig {
         minSdk library.min_sdk
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
