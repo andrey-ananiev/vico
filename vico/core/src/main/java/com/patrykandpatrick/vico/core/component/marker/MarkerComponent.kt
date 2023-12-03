@@ -46,7 +46,7 @@ import com.patrykandpatrick.vico.core.marker.MarkerLabelFormatter
  * @param guideline an optional line drawn from the bottom of the chart to the bottom edge of the [label].
  */
 public open class MarkerComponent(
-    public val label: TextComponent,
+    public val label: TextComponent?,
     public val indicator: Component?,
     public val guideline: LineComponent?,
 ) : Marker {
@@ -100,22 +100,24 @@ public open class MarkerComponent(
         markedEntries: List<Marker.EntryModel>,
         chartValues: ChartValues,
     ): Unit = with(context) {
-        val text = labelFormatter.getLabel(markedEntries, chartValues)
-        val entryX = markedEntries.averageOf { it.location.x }
-        val labelBounds =
-            label.getTextBounds(context = context, text = text, width = bounds.width().toInt(), outRect = tempBounds)
-        val halfOfTextWidth = labelBounds.width().half
-        val x = overrideXPositionToFit(entryX, bounds, halfOfTextWidth)
-        this[MarkerCorneredShape.tickXKey] = entryX
+        if (label != null) {
+            val text = labelFormatter.getLabel(markedEntries, chartValues)
+            val entryX = markedEntries.averageOf { it.location.x }
+            val labelBounds =
+                label.getTextBounds(context = context, text = text, width = bounds.width().toInt(), outRect = tempBounds)
+            val halfOfTextWidth = labelBounds.width().half
+            val x = overrideXPositionToFit(entryX, bounds, halfOfTextWidth)
+            this[MarkerCorneredShape.tickXKey] = entryX
 
-        label.drawText(
-            context = context,
-            text = text,
-            textX = x,
-            textY = bounds.top - labelBounds.height() - label.tickSizeDp.pixels,
-            verticalPosition = VerticalPosition.Bottom,
-            maxTextWidth = minOf(bounds.right - x, x - bounds.left).doubled.ceil.toInt(),
-        )
+            label.drawText(
+                context = context,
+                text = text,
+                textX = x,
+                textY = bounds.top - labelBounds.height() - label.tickSizeDp.pixels,
+                verticalPosition = VerticalPosition.Bottom,
+                maxTextWidth = minOf(bounds.right - x, x - bounds.left).doubled.ceil.toInt(),
+            )
+        }
     }
 
     private fun overrideXPositionToFit(
@@ -151,6 +153,7 @@ public open class MarkerComponent(
         outInsets: Insets,
         horizontalDimensions: HorizontalDimensions,
     ): Unit = with(context) {
-        outInsets.top = label.getHeight(context) + label.tickSizeDp.pixels
+        outInsets.top = if (label != null) label.getHeight(context) + label.tickSizeDp.pixels
+        else 0F
     }
 }
