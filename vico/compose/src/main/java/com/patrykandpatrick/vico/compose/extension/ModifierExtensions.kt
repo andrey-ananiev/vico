@@ -17,7 +17,6 @@
 package com.patrykandpatrick.vico.compose.extension
 
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
@@ -42,34 +41,22 @@ internal fun Modifier.chartTouchEvent(
         if (setTouchPoint != null) {
             pointerInput(setTouchPoint) {
                 awaitPointerEventScope {
-                    var isDragStarted = false
+                    var isNoDrag = true
                     while (true) {
                         val event = awaitPointerEvent()
                         when (event.type) {
-                            PointerEventType.Move -> isDragStarted = true
-                            PointerEventType.Scroll -> isDragStarted = true
+                            PointerEventType.Press -> setTouchPoint(null)
+                            PointerEventType.Move -> isNoDrag = false
                             PointerEventType.Release -> {
-                                if (!isDragStarted) setTouchPoint(
-                                    event.changes.first().position.point
-                                )
-                                isDragStarted = false
+                                if (isNoDrag) {
+                                    setTouchPoint(event.changes.first().position.point)
+                                } else {
+                                    isNoDrag = true
+                                }
                             }
                         }
                     }
                 }
-            }
-        } else {
-            Modifier
-        },
-    )
-    .then(
-        if (!isScrollEnabled && setTouchPoint != null) {
-            pointerInput(setTouchPoint) {
-                detectHorizontalDragGestures(
-                    onDragStart = {  },
-                    onDragEnd = { },
-                    onDragCancel = { },
-                ) { _, _ -> }
             }
         } else {
             Modifier
