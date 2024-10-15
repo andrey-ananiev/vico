@@ -24,8 +24,11 @@ import com.patrykandpatrick.vico.compose.axis.horizontal.rememberBottomAxis
 import com.patrykandpatrick.vico.compose.axis.vertical.rememberStartAxis
 import com.patrykandpatrick.vico.compose.chart.Chart
 import com.patrykandpatrick.vico.compose.chart.line.lineChart
+import com.patrykandpatrick.vico.compose.component.textComponent
 import com.patrykandpatrick.vico.compose.style.ProvideChartStyle
+import com.patrykandpatrick.vico.compose.style.currentChartStyle
 import com.patrykandpatrick.vico.core.axis.Axis
+import com.patrykandpatrick.vico.core.chart.line.LineChart
 import com.patrykandpatrick.vico.core.entry.ChartEntryModelProducer
 import com.patrykandpatrick.vico.databinding.Chart1Binding
 import com.patrykandpatrick.vico.sample.showcase.UISystem
@@ -43,9 +46,17 @@ internal fun Chart1(uiSystem: UISystem, chartEntryModelProducer: ChartEntryModel
 @Composable
 private fun ComposeChart1(chartEntryModelProducer: ChartEntryModelProducer) {
     val marker = rememberMarker()
+    val defaultLines = currentChartStyle.lineChart.lines
     ProvideChartStyle(rememberChartStyle(chartColors)) {
         Chart(
-            chart = lineChart(persistentMarkers = remember(marker) { mapOf(PERSISTENT_MARKER_X to marker) }),
+            chart = lineChart(
+                lines = defaultLines.map {
+                     LineChart.LineSpec(
+                         dataLabel = textComponent(),
+                     )
+                },
+                persistentMarkers = remember(marker) { mapOf(PERSISTENT_MARKER_X to marker) },
+            ),
             chartModelProducer = chartEntryModelProducer,
             startAxis = rememberStartAxis(),
             bottomAxis = rememberBottomAxis(guideline = null),

@@ -405,7 +405,7 @@ public open class LineChart(
                     value = chartEntry.y,
                     chartValues = chartValues,
                 )
-                val maxWidth = getMaxDataLabelWidth(chartEntry, x, previousX, nextX)
+                val maxWidth = 10000 //getMaxDataLabelWidth(chartEntry, x, previousX, nextX)
                 val verticalPosition = lineSpec.dataLabelVerticalPosition.inBounds(
                     bounds = bounds,
                     distanceFromPoint = distanceFromLine,

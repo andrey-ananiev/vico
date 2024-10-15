@@ -68,8 +68,10 @@ private fun ComposeChart2(chartEntryModelProducer: ChartEntryModelProducer) {
                         LineComponent(defaultColumn.color, COLUMN_WIDTH_DP, defaultColumn.shape)
                     }
                 },
+                dataLabel = textComponent(),
                 decorations = remember(thresholdLine) { listOf(thresholdLine) },
             ),
+            isZoomEnabled = true,
             chartModelProducer = chartEntryModelProducer,
             startAxis = rememberStartAxis(valueFormatter = startAxisValueFormatter, itemPlacer = startAxisItemPlacer),
             bottomAxis = rememberBottomAxis(itemPlacer = bottomAxisItemPlacer),

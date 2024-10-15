@@ -266,19 +266,20 @@ public open class ColumnChart(
             val canUseXSpacing =
                 mergeMode == MergeMode.Stack ||
                     mergeMode == MergeMode.Grouped && modelEntriesSize == 1
-            var maxWidth = when {
-                canUseXSpacing -> horizontalDimensions.xSpacing
-                mergeMode == MergeMode.Grouped ->
-                    (columnThicknessDp + minOf(spacingDp, innerSpacingDp).half).pixels * zoom
-
-                else -> error(message = "Encountered an unexpected `MergeMode`.")
-            }
-            if (isFirst && horizontalLayout is HorizontalLayout.FullWidth) {
-                maxWidth = maxWidth.coerceAtMost(horizontalDimensions.startPadding.doubled)
-            }
-            if (isLast && horizontalLayout is HorizontalLayout.FullWidth) {
-                maxWidth = maxWidth.coerceAtMost(horizontalDimensions.endPadding.doubled)
-            }
+            val maxWidth = 10000F
+//            var maxWidth = when {
+//                canUseXSpacing -> horizontalDimensions.xSpacing
+//                mergeMode == MergeMode.Grouped ->
+//                    (columnThicknessDp + minOf(spacingDp, innerSpacingDp).half).pixels * zoom
+//
+//                else -> error(message = "Encountered an unexpected `MergeMode`.")
+//            }
+//            if (isFirst && horizontalLayout is HorizontalLayout.FullWidth) {
+//                maxWidth = maxWidth.coerceAtMost(horizontalDimensions.startPadding.doubled)
+//            }
+//            if (isLast && horizontalLayout is HorizontalLayout.FullWidth) {
+//                maxWidth = maxWidth.coerceAtMost(horizontalDimensions.endPadding.doubled)
+//            }
             val text = dataLabelValueFormatter.formatValue(
                 value = dataLabelValue,
                 chartValues = chartValuesProvider.getChartValues(axisPosition = targetVerticalAxisPosition),
